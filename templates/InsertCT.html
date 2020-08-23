@@ -1,0 +1,33 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% include 'headerfiles.html' %}
+</head>
+<body style="background: url('{% static 'images/pic21.jpg' %}'); min-height: 100vh">
+{% if  sadmintype  == 'Super Admin' %}
+    {% include 'superadmin_header.html' %}
+{% else %}
+    {% include 'subadmin_header.html' %}
+{% endif %}
+    <div class="container" style="min-height: 350px">
+        <br><br><div class="text-center" style="color: white"><h1>INSERT CATEGORY</h1></div><br>
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6" style="background-color: whitesmoke; border-radius: 30px"><br>
+                <form id="frm_insert" method="get" class="form-group">
+                    <label>Enter Category</label>
+                    <input type="text" id="Textbox1" name="Textbox1" placeholder="Category" class="form-control" autofocus data-rule-required="true" data-msg-required="Please Enter Category"><br>
+                    <label>Enter Description</label>
+                    <textarea name="Textbox2" id="Textbox2" placeholder="Description" class="form-control" data-rule-required="true" rows=4 data-msg-required="Please Enter Description"></textarea><br>
+                    <div class="text-center"><input type="button" value="SUBMIT" onclick="OnInsertClick()" class="btn btn-success"></div>
+                </form>
+                <div class="text-center">
+                    <span id="sp1"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

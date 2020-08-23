@@ -1,0 +1,128 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% include 'headerfiles.html' %}
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script>
+        function billinginfo() {
+            if ($('#frm_billinginfo').valid()) {
+                var formdata = new FormData();
+                formdata.append('email', document.getElementById('email').value);
+                formdata.append('fullname', document.getElementById('fullname').value);
+                formdata.append('netamount', document.getElementById('netamount').value);
+                formdata.append('mobileno', document.getElementById('mobileno').value);
+                formdata.append('address', document.getElementById('address').value);
+                formdata.append('city', document.getElementById('city').value);
+                formdata.append('paymentmode', document.getElementById('paymentmode').value);
+                if (document.getElementById('paymentmode').value == 'Online') {
+                    var amount = parseFloat(document.getElementById('netamount').value) * 100;
+                    var options = {
+                        "key": "rzp_test_dRWiKHS7zr2Gki",
+                        "amount": amount,
+                        "name": "Online Shopping System",
+                        "description": "Payment Gateway",
+                        "image": "http://ecourses.aec.edu.in/aditya/images/po4.png",
+                        "handler": function (response) {
+                            //alert(response.razorpay_payment_id);
+                            if (response.razorpay_payment_id == "") {
+                                //alert('Failed');
+                                var xml = new XMLHttpRequest();
+                                xml.onreadystatechange = function () {
+                                    if (this.readyState == 4 && this.status == 200) {
+                                        window.location.href = "/thankspage";
+                                    }
+                                };
+                                xml.open('POST', '/checkoutaction', true);
+                                xml.send(formdata);
+                            }
+                            else {
+                                //alert('Success');
+                                var xml = new XMLHttpRequest();
+                                xml.onreadystatechange = function () {
+                                    if (this.readyState == 4 && this.status == 200) {
+                                        alert('Thanks for your order. We will revert back you soon.....');
+                                        window.location.href = "index";
+                                    }
+                                };
+                                xml.open('POST', '/checkoutaction', true);
+                                xml.send(formdata);
+                            }
+                        },
+                        "prefill": {
+                            {#"name": document.getElementById('fullname').value,#}
+                            "email": "{{ request.session.USEREMAIL }}"
+                        },
+                        "notes": {
+                            "address": ""
+                        },
+                        "theme": {
+                            "color": "#F37254"
+                        }
+                    };
+                    var rzp1 = new Razorpay(options);
+                    rzp1.open();
+                }
+                else {
+                    var xml = new XMLHttpRequest();
+                    xml.onreadystatechange = function () {
+                        if (this.readyState == 4 && this.status == 200) {
+                            alert('Thanks for your order. We will revert back you soon.....');
+                            window.location.href = "index";
+                        }
+                    };
+                    xml.open('POST', '/checkoutaction', true);
+                    xml.send(formdata);
+                    }
+            }
+        }
+    </script>
+</head>
+<body style="background: url('{% static 'images/pic21.jpg' %}')" style="min-height: 100vh">
+{% include 'user_header.html' %}
+<div class="container">
+    <h1 class="text-center">BILLING INFO</h1>
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8" style="background-color: whitesmoke; border-radius: 30px">
+        <form id="frm_billinginfo"><br>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="col-sm-12">
+                        <label>Email</label>
+                        <input type="email" value="{{ request.session.USEREMAIL }}" id="email" placeholder="Email" name="email" class="form-control" readonly><br>
+                        <label>Enter Name</label>
+                        <input type="text" id="fullname" name="fullname" placeholder="Name" class="form-control" value="{{ fullname }}" data-rule-required="true" data-msg-required="Please Enter Full Name"><br>
+                        <label>Enter Mobileno</label>
+                        <input type="number" id="mobileno" name="mobileno" class="form-control" value="{{ mobileno }}" maxlength=10 minlength=10 placeholder="Phone Number" data-rule-required="true" data-msg-required="Please Enter Mobile Number"><br>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="col-sm-12">
+                        <label>Net Amount to be Paid</label>
+                        <input type="text" id="netamount" name="netamount" class="form-control" value="{{ netamount }}" readonly><br>
+                        <label>Enter City</label>
+                        <input type="text" id="city" name="city" class="form-control" value="{{ city }}" placeholder="City" data-rule-required="true" data-msg-required="Please Enter City"><br>
+                        <label>Select Payment Mode</label>
+                        <select id="paymentmode" class="form-control" name="paymentmode" style="height: 34px" data-rule-required="true" data-msg-required="Please Choose Payment Mode"><option value="">Choose</option>
+                            <option value="Online">Online</option>
+                            <option value="COD">COD</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <label>Enter Address</label>
+                <input type="text" id="address" name="address" class="form-control" value="{{ address }}" placeholder="Address" data-rule-required="true" data-msg-required="Please Enter Address"><br>
+            </div>
+            <div class="form-group text-center">
+                <input type="button" class="btn btn-success" onclick="billinginfo()" value="Checkout">
+            </div>
+        </form><br>
+        <span id="sp1"></span><br>
+    </div>
+</div><br>
+{% include 'footer.html' %}
+</body>
+</html>

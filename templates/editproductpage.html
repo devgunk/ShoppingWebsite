@@ -1,0 +1,98 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% include 'headerfiles.html' %}
+    <script>
+        function val() {
+            if ($('#frm_editproduct').valid()) {
+            }
+        }
+    </script>
+</head>
+<body style="background: url('{% static 'images/pic21.jpg' %}'); min-height: 800px">
+{% for p in mydata %}
+    {% if p.sadmintype %}
+        {% if p.sadmintype == 'Super Admin' %}
+            {% include 'superadmin_header.html' %}
+        {% else %}
+            {% include 'subadmin_header.html' %}
+            {% endif %}
+    {% endif %}
+{% endfor %}
+<div class="container">
+        <h1 class="text-center" style="color: white">Edit Product</h1>
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8" style="border-radius: 30px; background-color: whitesmoke">
+        <form id="frm_editproduct" action="editproductaction" method="get"><br>
+            <label>Product ID</label>
+            {% for p in mydata %}
+                {% if p.pid %}
+                    <input type="text" value="{{ p.pid }}" name="pid" id="pid" class="form-control" readonly>
+                {% endif %}
+            {% endfor %}<br>
+            <label>Category</label>
+            <select name="categoryname" id="categoryname" class="form-control" data-rule-required="true"
+                    data-msg-required="Please Enter Category Name">
+                {% for p in mydata %}
+                    {% if p.categoryname %}
+                        <option value="{{ p.categoryname }}">{{ p.categoryname }}</option>
+                    {% endif %}
+                {% endfor %}
+                {% for p in mydata %}
+                    {% if p.sadmintype %}
+                    {% else %}
+                        <option value="{{ p.category }}">{{ p.category }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select><br>
+            <label>Product Name</label>
+            {% for p in mydata %}
+                {% if p.pname %}
+                    <input type="text" id="pname" value="{{ p.pname }}" name="pname" class="form-control" data-rule-required="true" data-msg-required="Please Enter Product Name">
+                {% endif %}
+            {% endfor %}<br>
+            <label>Description</label>
+            {% for p in mydata %}
+                {% if p.description %}
+                    <textarea id="description" name="description" class="form-control" data-rule-required="true" data-msg-required="Please Enter Description">{{ p.description }}</textarea>
+                {% endif %}
+            {% endfor %}<br>
+            <label>Price</label>
+            {% for p in mydata %}
+                {% if p.price %}
+                    <input type="number" id="price" name="price" value="{{ p.price }}" class="form-control" data-rule-required="true" data-msg-required="Please Enter Price">
+                {% endif %}
+            {% endfor %}<br>
+            <label>MRP</label>
+            {% for p in mydata %}
+                {% if p.mrp %}
+                    <input type="number" id="mrp" name="mrp" value="{{ p.mrp }}" class="form-control" data-rule-required="true" data-msg-required="Please Enter MRP">
+                {% endif %}
+            {% endfor %}<br>
+            <div class="col-sm-10">
+                <label>Photo</label>
+                <input type="file" id="photo" name="photo" class="form-control">
+                {% for p in mydata %}
+                    {% if p.mrp %}
+                        <div style="visibility: hidden"><input  id="cphoto" name="cphoto" value="{{ p.photo }}" ></div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="col-sm-2">
+                {% for p in mydata %}
+                    {% if p.photo %}
+                        <img src="../static/media/{{ p.photo }}" style="width:100px;height: 90px">
+                    {% endif %}
+                {% endfor %}
+            </div><br>
+                <div class="form-group text-center">
+                    <input type="submit" class="btn btn-success"  onclick="val()" value="EDIT">
+                </div>
+            <span id="sp1"></span>
+        </form>
+    </div>
+</div>
+</body>
+</html>

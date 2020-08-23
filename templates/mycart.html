@@ -1,0 +1,26 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% include 'headerfiles.html' %}
+</head>
+<body onload="mycart()" style="background: url('{% static 'images/pic21.jpg' %}')" style="min-height: 100%">
+{% if request.session.USEREMAIL %}
+    {% include 'user_header.html' %}
+{% else %}
+    {% include 'public_header.html' %}
+{% endif %}
+<br>
+<div class="container" style="min-height: 400px" >
+    <div ><br>
+        <h1 class="text-center" style="color: white">CART</h1><br>
+        <div class="col-md-12" style="background-color: whitesmoke; border-radius: 30px">
+            <br><h1><div id="outputnoele" class="text-center"></div></h1>
+            <div id="output"></div><br>
+        </div>
+    </div>
+</div>
+</body>
+{% include 'footer.html' %}
+</html>

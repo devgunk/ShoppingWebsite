@@ -1,0 +1,38 @@
+.wrapper
+{
+    padding:30px 10px;
+}
+.myheading
+{
+    margin-bottom: 10px;
+}
+.myheading span
+{
+    color:#01cfcf;
+}
+.myheading1 span
+{
+    color: #FC8213
+}
+label
+{
+    margin:5px 0px;
+}
+.mybtn
+{
+    padding:10px 30px;
+    font-size:15px;
+}
+.error
+{
+    color:red;
+    font-size:12px;
+    font-weight: normal;
+}
+#output
+{
+    border: 1px solid #000;
+    margin:0px 0px 20px 0px;
+    padding:10px;
+    text-align: center;
+}

@@ -1,0 +1,86 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+    {% include 'headerfiles.html' %}
+</head>
+<body>
+<!--headder-->
+<div class="header-outs" id="home">
+    <div class="header-bar">
+        {% if request.session.USEREMAIL %}
+            {% include 'user_header.html' %}
+        {% else %}
+            {% include 'public_header.html' %}
+        {% endif %}
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+                <ul class="navbar-nav ">
+                    <li class="nav-item ">
+                        <a class="nav-link" href="index">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a href="about" class="nav-link">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="service" class="nav-link">Service</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="shop" class="nav-link">Shop Now</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Product
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            {% for p in mydata %}
+                                {% if p.sadmintype %}
+                                {% else %}
+                                    <a class="nav-link" href="product?category={{ p.category }}">{{ p.category }}</a>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="contact" class="nav-link">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</div>
+<div class="inner_page-banner" style="background: url('{% static 'images/pic23.png' %}')">
+</div>
+<div class="text-center" style="background-color: #ea1d5d; color: white; cursor: default">
+    <a href="index" style="color: white">Home</a> / / About
+</div>
+<section class="py-lg-4 py-md-3 py-sm-3 py-3" style="background-color: whitesmoke">
+    <div class="container py-lg-5 py-md-4 py-sm-4 py-3">
+        <h3 class="title text-center mb-lg-5 mb-md-4 mb-sm-4 mb-3">About Us</h3>
+        <div class="about-innergrid-agile text-center">
+            <h4>Welcome To Our Store</h4>
+            <p class="mb-3">
+                Deva-Shop is a leading destination for online shopping in India, offering some of the best price and a completely hassle-free experience with options of paying through Cash on Delivery, Debt Card, Credit Card and Net Banking processed through secure and trurted gateways.
+                Now shop for your favourite books, apparel, footwear, lifestyle accessories, abby care products, toys, posters, sports and fitness, mobile phones, laptops, cameras, movies, music, health and beauty, television, refrigerators, air-conditioners, washing machines, MP3players and products from a host of other categories available.
+                Some of the top selling electronic brands on the website are Samsung, HTC, Nokia, Dell, HP, Sony, Canon, Nikon, LG Toshiba, Philips, Braun, Bajaj, and Morphy Richards.
+                Browse through our cool lifestyle accessories, apparel and footwear brands featured on our site with expert descriptions to help you arrive at the right buying decision.
+            </p>
+            <div>
+                <img src="{% static 'images/pic.jpg' %}" style="width: 1000px">
+            </div>
+        </div>
+        <div class="about-sub-inner text-center mt-lg-4 mt-3">
+            <h4>A faster and better
+                best to shop
+            </h4>
+        </div>
+    </div>
+</section>
+{% include 'footer.html' %}
+</body>
+</html>

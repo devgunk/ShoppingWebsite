@@ -1,0 +1,204 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+    {% include 'headerfiles.html' %}
+</head>
+{% for p in mydata %}
+    {% if p.pid %}
+        <body onload="showreviews({{ p.pid }})">
+    {% endif %}
+{% endfor %}
+<div class="header-outs" id="home">
+    <div class="header-bar">
+        {% if request.session.USEREMAIL %}
+            {% include 'user_header.html' %}
+        {% else %}
+            {% include 'public_header.html' %}
+        {% endif %}
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+                <ul class="navbar-nav ">
+                    <li class="nav-item ">
+                        <a class="nav-link" href="index">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="about" class="nav-link">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="service" class="nav-link">Service</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a href="shop" class="nav-link">Shop Now</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Product
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            {% for p in mydata %}
+                                {% if p.sadmintype %}
+                                {% else %}
+                                    <a class="nav-link" href="product?category={{ p.category }}">{{ p.category }}</a>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="contact" class="nav-link">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</div>
+<div class="inner_page-banner" style="background: url('{% static 'images/pic23.png' %}')">
+</div>
+<div class="text-center" style="background-color: #ea1d5d; color: white; cursor: default">
+    <a href="index" style="color: white">Home</a> / / Quick View
+</div>
+<section class="banner-bottom py-lg-5 py-3">
+    <div class="container">
+        <div class="inner-sec-shop pt-lg-4 pt-3">
+            <div class="row">
+                <div class="col-lg-4 single-right-left ">
+                    <div class="grid images_3_of_2">
+                        <div class="flexslider1">
+                            <ul class="slides">
+                                <li data-thumb="images/f2.jpg">
+                                    <div class="thumb-image">
+                                        {% for p in mydata %}
+                                            {% if p.photo %}
+                                                <img src="../static/media/{{ p.photo }}" style="width:300px;height: 300px">
+                                            {% endif %}
+                                    {% endfor %}
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8 single-right-left simpleCart_shelfItem">
+                    {% for p in mydata %}
+                        {% if p.pname %}
+                            <h3>{{ p.pname.upper }}</h3><br>
+                        {% endif %}
+                    {% endfor %}
+                    {% for p in mydata %}
+                        {% if p.price %}
+                            <p><span class="item_price">₹ {{ p.price }}</span>
+                        {% endif %}
+                    {% endfor %}
+                    {% for p in mydata %}
+                        {% if p.mrp %}
+                        <del>₹ {{ p.mrp }}</del>
+                        {% endif %}
+                    {% endfor %}
+                    </p>
+                    <div class="tab1">
+                        <div class="single_page">
+                            <div class="col-sm-3">
+                                <h6>Quantity</h6>
+                                <input type="number" name="qty" id="qty" value="1" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <br><br><br><br><br>
+                    <div class="tab1">
+                        <div class="single_page">
+                            <h6>Description</h6>
+                            {% for p in mydata %}
+                                {% if p.description %}
+                                    <p>{{ p.description }}</p>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        <br>
+                    </div>
+                    <div class="occasion-cart">
+                        <div class="toys single-item singlepage">
+                            <form action="index" method="get">
+                                <button type="button" onclick="addtocartquickview({{ pid }} {{ price }})" class="toys-cart ptoys-cart add">
+                                    Add to Cart
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="responsive_tabs">
+                    <div id="horizontalTab">
+                        <div class="resp-tabs-container">
+                            <div class="tab2">
+                                <div class="single_page">
+                                    <div class="bootstrap-tab-text-grids">
+                                        <div class="bootstrap-tab-text-grid">
+                                            <div class="bootstrap-tab-text-grid-left">
+                                                <img src="{% static 'images/kdsnap.jpg' %}" alt=" " class="img-fluid">
+                                            </div>
+                                            <div class="bootstrap-tab-text-grid-right">
+                                                <ul>
+                                                    <li><a style="color: green; cursor: default">Admin</a></li>
+                                                    <li><a href="contact"><i class="fa fa-reply-all" aria-hidden="true"></i> Contact</a></li>
+                                                </ul>
+                                                <p>
+                                                    I Karan Devgun, for the betterment of this website asks you for your views regarding this website.<br>
+                                                    Kindly give your auspicious feedback on respective email.
+                                                </p>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div><br>
+                                        {% for p in mydata %}
+                                            {% if p.email %}
+                                                <div class="add-review">
+                                                    <h4>add a review</h4>
+                                                    <form id="review" method="post">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <input type="text" name="to" id="to" readonly
+                                                                       value="karandevgunsharma@gmail.com"
+                                                                       data-rule-required="true"
+                                                                       data-msg-required="Please Enter Admin's Email">
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <input type="email" name="email" id="email" placeholder="Email" value="{{ p.email }}" data-rule-required="true" data-msg-required="Please Enter Email">
+                                                            </div>
+                                                        </div>
+                                                        <textarea name="content" id="content" placeholder="Reviews" data-rule-required="true" data-msg-required="Please Enter Content"></textarea>
+                                                        <div class="text-center row">
+                                                            <div class="col-sm-2"></div>
+                                                            <div class="col-sm-8">
+                                                                {% for p1 in mydata %}
+                                                                    {% if p1.pid %}
+                                                                        <input type="button" class="btn btn-success form-control" onclick="reviewaction({{ p1.pid }})" value="SEND">
+                                                                    {% endif %}
+                                                                {% endfor %}
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                    <br>
+                                                    <div class="text-center"
+                                                         style="background-color: #fffccf; color: #0c0c0c; border-radius: 30px"><span
+                                                            id="sp1"></span></div>
+                                                    <br>
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div id="output_review"></div>
+{% include 'footer.html' %}
+</body>
+</html>

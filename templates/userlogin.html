@@ -1,0 +1,49 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% include 'headerfiles.html' %}
+</head>
+<body style="background: url('{% static 'images/pic21.jpg' %}')" style="height: 100vh">
+{% include 'public_header.html' %}
+<div class="container"><br>
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-11">
+            <div class="col-md-5"><br><br><br>
+                <div class="col-sm-12" style="background-color: whitesmoke;border-radius: 30px"><br><br>
+                    <h1 class="text-center">USER LOGIN</h1><br><br>
+                    <form id="frm_usersignin" method="get">
+                        <input type="email" id="email" name="email" placeholder="Email" autofocus class="form-control" data-rule-required="true" data-msg-required="Please Enter Email"><br><br>
+                        <input type="password" id="password" name="password" placeholder="Password" class="form-control" data-rule-required="true" data-msg-required="Please Enter Password"><br><br>
+                        <div class="text-center">
+                            <input type="button" class="btn btn-success" onclick="userlogin()" value="SUBMIT">
+                        </div><br>
+                        <div class="text-center"><span id="sp11" style="color: red"></span><br><br><br></div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-sm-1"></div>
+            <div class="col-sm-5" style="background-color: whitesmoke;border-radius: 30px">
+                <h1 class="text-center">User Signup</h1><br>
+                <form id="frm_usersignup" method="get">
+                    <input type="email" id="uemail" name="uemail" class="form-control" placeholder="Email" data-rule-required="true" data-msg-required="Please Enter Email" autofocus><br>
+                    <input type="text" id="fullname" name="fullname" placeholder="Name" class="form-control" data-rule-required="true" data-msg-required="Please Enter Full Name"><br>
+                    <input type="number" id="mobileno" name="mobileno" placeholder="Phone Number" maxlength=10 minlength=10 class="form-control" data-rule-required="true" data-msg-required="Please Enter Mobile Number"><br>
+                    <input type="text" id="address" name="address" placeholder="Address" class="form-control" data-rule-required="true" data-msg-required="Please Enter Address"><br>
+                    <input type="text" id="city" name="city" placeholder="City" class="form-control" data-rule-required="true" data-msg-required="Please Enter City"><br>
+                    <input type="password" id="upassword" name="upassword" placeholder="Password" class="form-control" data-rule-required="true" data-msg-required="Please Enter Password"><br>
+                    <input type="password" id="confirmpassword" placeholder="Confirm Password" name="confirmpassword" class="form-control" data-rule-required="true" data-msg-required="Please Enter Confirm Password" data-rule-equalto="#upassword" data-msg-equalto="Mismatch Password"><br>
+                    <div class="form-group text-center">
+                        <input type="button" class="btn btn-success" onclick="usersignup()" value="SIGN UP">
+                    </div>
+                    <div class="text-center"><span id="sp1" style="color: red"></span></div><br>
+                </form>
+            </div>
+        </div>
+    </div>
+</div><br><br>
+{% include 'footer.html' %}
+</body>
+</html>

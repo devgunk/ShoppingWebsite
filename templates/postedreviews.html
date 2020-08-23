@@ -1,0 +1,47 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% include 'headerfiles.html' %}
+</head>
+<body style="background: url('{% static 'images/pic21.jpg' %}');min-height: 100vh">
+{% for p in mydata %}
+    {% if  p.sadmintype  %}
+        {% if  p.sadmintype  == 'Super Admin' %}
+            {% include 'superadmin_header.html' %}
+        {% elif  p.sadmintype  == 'Sub Admin' %}
+            {% include 'subadmin_header.html' %}
+        {% endif %}
+    {% endif %}
+{% endfor %}
+    <div class="container">
+        <div class="text-center" style=" color: white"><h1>POSTED REVIEWS</h1></div><br>
+        <div style="background-color: whitesmoke; border-radius: 30px">
+            <table class="table table-striped" style="text-align: center">
+                <tr>
+                    <th style="text-align: center">S NO.</th>
+                    <th style="text-align: center">Email</th>
+                    <th style="text-align: center">Content</th>
+                    <th style="text-align: center">P ID</th>
+                    <th style="text-align: center">Photo</th>
+                    <th style="text-align: center">Delete</th>
+                </tr>
+                {% for result in mydata %}
+                    {% if result.sadmintype %}
+                    {% else %}
+                        <tr>
+                            <td>{{ result.id }}</td>
+                            <td>{{ result.email }}</td>
+                            <td>{{ result.content }}</td>
+                            <td>{{ result.pid }}</td>
+                            <td><img src="../static/media/{{ result.photo }}" style="width:80px;height: 70px"></td>
+                            <td><a href="{{ result.deleteurl }}"><span class='glyphicon glyphicon-trash' style='color:red;'></span></a></td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</body>
+</html>

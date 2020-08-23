@@ -1,0 +1,20 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% include 'headerfiles.html' %}
+</head>
+<body onload="myorders('{{ request.session.USEREMAIL }}')" style="background: url('{% static 'images/pic21.jpg' %}'); min-height: 100vh">
+{% include 'user_header.html' %}
+<h1 class="text-center" style=" color: white">MY ORDERS</h1>
+<div class="container" style="min-height: 350px;max-height: 350px">
+    <div style="background-color: whitesmoke; border-radius: 30px;">
+    <br><h1><div id="outputordered"></div></h1>
+    <div id="output"></div><br>
+    </div>
+</div>
+{% include 'footer.html' %}
+</body>
+</html>
+

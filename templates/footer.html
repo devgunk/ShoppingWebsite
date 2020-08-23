@@ -1,0 +1,109 @@
+{% load staticfiles %}
+{#<script src="{% static 'js/jquery-2.2.3.min.js' %}"></script>#}
+<script src="{% static 'js/minicart.js' %}"></script>
+<script>
+    toys.render();
+    toys.cart.on('toys_checkout', function (evt) {
+        var items, len, i;
+        if (this.subtotal() > 0) {
+            items = this.items();
+            for (i = 0, len = items.length; i < len; i++) {}
+        }
+    });
+</script>
+<script src="{% static 'js/responsiveslides.min.js' %}"></script>
+<script>
+    $(function () {
+        $("#slider4").responsiveSlides({
+            auto: true,
+            pager:false,
+            nav:true ,
+            speed: 900,
+            namespace: "callbacks",
+            before: function () {
+                $('.events').append("<li>before event fired.</li>");
+            },
+            after: function () {
+                $('.events').append("<li>after event fired.</li>");
+            }
+        });
+    });
+</script>
+<script src="{% static 'js/jquery.flexisel.js' %}"></script>
+<script>
+    {#$(window).load(function() {#}
+    {#    $("#flexiselDemo1").flexisel({#}
+    {#        visibleItems: 3,#}
+    {#        animationSpeed: 3000,#}
+    {#        autoPlay:true,#}
+    {#        autoPlaySpeed: 2000,#}
+    {#        pauseOnHover: true,#}
+    {#        enableResponsiveBreakpoints: true,#}
+    {#        responsiveBreakpoints: {#}
+    {#            portrait: {#}
+    {#                changePoint:480,#}
+    {#                visibleItems: 1#}
+    {#            },#}
+    {#            landscape: {#}
+    {#                changePoint:640,#}
+    {#                visibleItems:2#}
+    {#            },#}
+    {#            tablet: {#}
+    {#                changePoint:768,#}
+    {#                visibleItems: 2#}
+    {#            }#}
+    {#        }#}
+    {#    });#}
+   <!-- });-->
+</script>
+<script src="{% static 'js/move-top.js' %}"></script>
+<script src="{% static 'js/easing.js' %}"></script>
+<script>
+    jQuery(document).ready(function ($) {
+        $(".scroll").click(function (event) {
+            event.preventDefault();
+            $('html,body').animate({
+                scrollTop: $(this.hash).offset().top
+            }, 900);
+        });
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        var defaults = {
+            containerID: 'toTop', // fading element id
+            containerHoverID: 'toTopHover', // fading element hover id
+            scrollSpeed: 1200,
+            easingType: 'linear'
+        };
+        $().UItoTop({
+            easingType: 'easeOutQuart'
+        });
+    });
+    addEventListener("load", function () {
+        setTimeout(hideURLbar, 0);
+    }, false);
+    function hideURLbar() {
+        window.scrollTo(0, 1);
+    }
+</script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+<footer>
+    <div class="text-center" style="color: #ea1d5d; background-color: #f7ecb5; font-size: 16px;">
+        <div class="container-fluid">
+            <div><br>
+                <span class="far fa-map"></span> VMM Educations&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Queens Road
+            </div><br>
+            <div>
+                <span class="fas fa-phone-volume"></span> +(91)95011-04337&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="fas fa-phone-volume"></span> +(91)79865-57752
+            </div><Br>
+            <div>
+                <span class="far fa-envelope"></span><a href="mailto:karandevgunsharma@gmail.com" style="color: #ea1d5d"> karandevgunsharma@gmail.com</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="far fa-envelope"></span><a href="mailto:devsharma69518@gmail.com" style="color: #ea1d5d"> devsharma69518@gmail.com</a>
+            </div><br>
+        </div>
+    </div>
+    <div class="text-center" style="color: white">
+            © 2018 Deva-Shop. All Rights Reserved | Design by Karan Devgun
+    </div>
+</footer>

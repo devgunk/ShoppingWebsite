@@ -1,0 +1,42 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% include 'headerfiles.html' %}
+    <script>
+        function check()
+        {
+            if($('#frm_insertrecord').valid())
+            {
+            }
+        }
+    </script>
+</head>
+<body style="background: url('{% static 'images/pic21.jpg' %}'); min-height: 100vh">
+{% if  sadmintype  == 'Super Admin' %}
+    {% include 'superadmin_header.html' %}
+{% else %}
+    {% include 'subadmin_header.html' %}
+{% endif %}
+    <div class="container"><br><br>
+        <div class="text-center" style="color: white"><h1>EDIT ADMIN PROFILE</h1></div><br>
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6" style="background-color: whitesmoke; border-radius: 30px"><br><br>
+                <div class="col-sm-12">
+                    <input type="email" id="email" name="email" placeholder="Email" value="{{ email }}" class="form-control" data-rule-required="true" data-msg-required="Please Enter Old Password" readonly>
+                    <div style="color: red;"><span id="sp1"></span></div><br>
+                    <div class="row"><div class="col-sm-8"><input type="password" value="{{ password }}" id="password" name="password" placeholder="Password" readonly class="form-control" data-rule-required="true" data-msg-required="Please Enter New Password"></div>
+                        <br><br><div><form action="changepassword" method="get"><input type="submit" class="btn btn-success" value="Change Password"></form></div></div><br>
+                    <form action="OnClickChangeName" id="frm_insertrecord" method="post">
+                        <input type="text" id="fullname" name="fullname" placeholder="Name" value="{{ fullname }}" class="form-control" data-rule-required="true" data-msg-required="Please Enter New Password"><br>
+                        <input type="text" id="admintype" name="admintype" placeholder="Admin Type" value="{{ admintype }}" readonly class="form-control" data-rule-required="true" data-msg-required="Please Enter New Password"><br>
+                        <div class="text-center"><input type="submit" value="SUBMIT" onclick="check()" class="btn btn-success"></div><br><br>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

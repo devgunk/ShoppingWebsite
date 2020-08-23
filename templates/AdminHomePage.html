@@ -1,0 +1,27 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% include 'headerfiles.html' %}
+</head>
+<body style="background: url('{% static 'images/pic21.jpg' %}'); min-height: 100vh">
+{% if  admintype  == 'Super Admin' %}
+    {% include 'superadmin_header.html' %}
+{% else %}
+    {% include 'subadmin_header.html' %}
+{% endif %}
+    <div class="container"><br><br><br>
+        <div class="row">
+            <div style="font-size: 20px; color: white" class="col-sm-6">
+                Your email id is : {{ email }}
+            </div>
+            <div class="col-sm-3"></div>
+            <div style="font-size: 20px; color: white;" class="text-right">
+                You are {{ admintype }}.
+            </div>
+        </div>
+        <div class="text-center" style=" margin-top:10%; font-size: 30px; color: white">Hi {{ fullname }}!!... Welcome to Admin Block.</div>
+    </div>
+</body>
+</html>

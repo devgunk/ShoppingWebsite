@@ -1,0 +1,21 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% include 'headerfiles.html'%}
+</head>
+<body onload="pendingorders()" style="background: url('{% static 'images/pic21.jpg' %}');min-height: 100vh">
+{% if  admintype  == 'Super Admin' %}
+    {% include 'superadmin_header.html' %}
+{% else %}
+    {% include 'subadmin_header.html' %}
+{% endif %}
+<div class="container">
+    <h1 class="text-center" style="color: white">PENDING ORDERS</h1>
+    <div style="background-color: whitesmoke;border-radius: 30px">
+        <div id="output"></div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,35 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% include 'headerfiles.html' %}
+</head>
+<body style="background: url('{% static 'images/pic21.jpg' %}'); min-height: 100vh">
+{% if  sadmintype  == 'Super Admin' %}
+    {% include 'superadmin_header.html' %}
+{% else %}
+    {% include 'subadmin_header.html' %}
+{% endif %}
+    <div class="container" style="min-height: 350px"><br>
+        <br><div class="text-center" style=" color: white"><h1>INSERT ADMIN</h1></div><br>
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6" style="background-color: whitesmoke; border-radius: 30px"><br>
+                <form id="frm_insertrecord" method="get" class="form-group">
+                    <label>Enter Email</label>
+                    <input type="email" class="form-control" id="textbox1" placeholder="Email" name="textbox1" autofocus data-rule-required="true" data-msg-required="Please Enter Email"><br>
+                    <label>Enter Password</label>
+                    <input type="password" class="form-control" placeholder="Password" id="textbox2" name="textbox2"  data-rule-required="true" data-msg-required="Please Enter Password"><br>
+                    <label>Enter Full Name</label>
+                    <input type="text" class="form-control" name="textbox3" placeholder="Full Name" id="textbox3"  data-rule-required="true" data-msg-required="Please Enter Full Name"><br>
+                    <label>Select Admin Type</label>
+                    <select class="form-control" name="textbox4" style="height: 34px" id="textbox4"><option value="Sub Admin">Sub Admin</option><br><option value="Super Admin">Super Admin</option></select><br>
+                    <div class="text-center"><input type="button" value="SUBMIT" onclick="addadmin()" class="btn btn-success"></div>
+                    <span id="sp1"></span>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

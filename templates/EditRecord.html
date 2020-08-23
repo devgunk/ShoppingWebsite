@@ -1,0 +1,51 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% include 'headerfiles.html' %}
+    <script>
+        function check()
+        {
+            if($('#frm_insertrecord').valid())
+            {
+                var s = document.getElementById('op2').innerText;
+                if (s == 'Sub Admin')
+                {
+                    document.getElementById('op1').innerHTML = "Super Admin";
+                }
+                else
+                {
+                    document.getElementById('op1').innerHTML = "Sub Admin";
+                }
+            }
+        }
+    </script>
+</head>
+<body onload="check()" style="background: url('{% static 'images/pic21.jpg' %}'); min-height: 100vh">
+{% if  sadmintype  == 'Super Admin' %}
+    {% include 'superadmin_header.html' %}
+{% else %}
+    {% include 'subadmin_header.html' %}
+{% endif %}
+    <div class="container">
+         <br><div class="text-center" style="color: white"><h1>EDIT ADMIN</h1></div><br>
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6" style="background-color: whitesmoke; border-radius: 30px">
+                <form action="OnClickEditRecord" id="frm_insertrecord" method="post"><br>
+                    <label>EMAIL ADMIN</label>
+                    <input type="email" value="{{ email }}" id="Textbox1" name="Textbox1" class="form-control" readonly><br>
+                    <label>Password</label>
+                    <input type="password" value="{{ password }}" id="Textbox2" name="Textbox2" class="form-control" data-rule-required="true" data-msg-required="Please Enter Password"><br>
+                    <label>Full Name</label>
+                    <input type="text" value="{{ fullname }}" name="Textbox3" id="Textbox3" class="form-control" data-rule-required="true" data-msg-required="Please Enter Full Name"><br>
+                    <label>Admin Type</label>
+                    <select class="form-control" style="height: 34px" id="Textbox4" name="Textbox4"><option id="op2">{{ admintype }}</option><option id="op1"></option></select><br>
+                    <div class="text-center"><input type="submit" value="SUBMIT" class="btn btn-success"></div><br>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

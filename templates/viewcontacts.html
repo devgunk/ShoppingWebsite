@@ -1,0 +1,47 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% include 'headerfiles.html' %}
+</head>
+<body style="background: url('{% static 'images/pic21.jpg' %}');min-height: 100vh">
+{% for p in mydata %}
+    {% if  p.sadmintype  %}
+        {% if  p.sadmintype  == 'Super Admin' %}
+            {% include 'superadmin_header.html' %}
+        {% elif  p.sadmintype  == 'Sub Admin' %}
+            {% include 'subadmin_header.html' %}
+        {% endif %}
+    {% endif %}
+{% endfor %}
+    <div class="container">
+        <div class="text-center" style=" color: white"><h1>CONTACTS</h1></div><br>
+        <div style="background-color: whitesmoke; border-radius: 30px">
+            <table class="table table-striped" style="text-align: center">
+                <tr>
+                    <th style="text-align: center">ID</th>
+                    <th style="text-align: center">Email</th>
+                    <th style="text-align: center">Name</th>
+                    <th style="text-align: center">Phone Number</th>
+                    <th style="text-align: center">Content</th>
+                    <th style="text-align: center">Delete</th>
+                </tr>
+                {% for result in mydata %}
+                    {% if result.sadmintype %}
+                    {% else %}
+                        <tr>
+                            <td>{{ result.id }}</td>
+                            <td>{{ result.email }}</td>
+                            <td>{{ result.name }}</td>
+                            <td>{{ result.phoneno }}</td>
+                            <td>{{ result.content }}</td>
+                            <td><a href="{{ result.deleteurl }}"><span class='glyphicon glyphicon-trash' style='color:red;'></span></a></td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</body>
+</html>
